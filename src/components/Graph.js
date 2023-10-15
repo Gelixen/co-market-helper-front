@@ -1,5 +1,4 @@
-import React, { Component,useState,useEffect, useRef   } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, { useRef } from 'react';
 import { AgChartsReact } from 'ag-charts-react';
 
 const ChartExample = (props) =>{
@@ -10,19 +9,15 @@ const ChartExample = (props) =>{
                                           // if the data contains values that are not valid numbers,
                                           // the formatter's `value` will be `undefined`
                                           
-                                          if (params.value / 1_000_000 >= 1) {
+                                          var valueMils = Math.floor(params.value / 1_000_000)
+                                          var valueThousands = (Math.floor(params.value % 1_000_000 / 1_000) + "");
                                           
-                                            var valueMils = Math.floor(params.value / 1_000_000)
-                                            var valueThousands = (Math.floor(params.value % 1_000_000 / 1_000) + "").padStart(3, "0");
-//                                            console.log("init ", params.value)
-//                                            console.log(valueMils + "." + valueThousands + "k")
-                                            return valueMils + "." + valueThousands + "kk";
+                                          if (valueMils >= 1) {
+                                            var thousandsPart = valueThousands > 100 ? "." + Math.floor(valueThousands / 100) : "";
+                                            console.log(valueThousands + "   " + thousandsPart)
+                                            return valueMils + thousandsPart + "kk";
                                           } else {
-                                              var valueMils = Math.floor(params.value / 1_000)
-//                                              var valueThousands = params.value % 1_000
-//                                              console.log("init ", params.value)
-//                                              console.log(valueMils + "." + valueThousands + "k")
-                                              return valueMils + "k";
+                                              return valueThousands + "k";
                                           }
                                       };
     
