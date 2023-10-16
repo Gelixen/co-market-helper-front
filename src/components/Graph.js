@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {AgChartsReact} from 'ag-charts-react';
 
-const ChartExample = (props) => {
+const Graph = (props) => {
 
     const chartRef = useRef(null);
 
@@ -14,7 +14,6 @@ const ChartExample = (props) => {
 
         if (valueMils >= 1) {
             var thousandsPart = valueThousands > 100 ? "." + Math.floor(valueThousands / 100) : "";
-            console.log(valueThousands + "   " + thousandsPart)
             return valueMils + thousandsPart + "kk";
         } else {
             return valueThousands + "k";
@@ -29,7 +28,7 @@ const ChartExample = (props) => {
         subtitle: {
             text: props.subtitle,
         },
-        data: props.data?.[props.item],
+        data: props.data,
         series: [
             {
                 type: "column",
@@ -110,4 +109,4 @@ const ChartExample = (props) => {
 
 };
 
-export default ChartExample;
+export default Graph;
